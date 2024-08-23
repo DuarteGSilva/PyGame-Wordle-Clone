@@ -245,7 +245,7 @@ class Game:
                         continue
             colors.append(DARK_GRAY)
         
-        # edge case (example >>> answer: crepe | word submited: eeepr [word doesnt exist..])
+        # edge case (example >>> answer: crepe | word submited: eeepr [word doesnt exist but still..])
         used_letters_2 = []
         for letter in word:
             if letter not in used_letters_2:
@@ -273,12 +273,12 @@ class Game:
 
         if self.grid[-1]._resolving:
             self.resolved = True
-            "losing animation here"
+            # addlosing animation here
         
         return "Word submitted"
     
     def clear(self):
-        "clear animation here?"
+        # add clear animation here?
         for word in self.grid:
             if word.resolved:
                 word.clear()
@@ -291,7 +291,7 @@ def main():
     # region initialize variables
     pg.init()
     screen = pg.display.set_mode((WIDTH, HEIGHT), pg.DOUBLEBUF | pg.HWSURFACE)
-    pg.display.set_caption("[SG] - Community Wordle")
+    pg.display.set_caption("PyGame Wordle")
     clock = pg.time.Clock()
     interface = Interface(screen, clock, (20, 700), 20,
         ("exit", None, "exit()"),
@@ -305,7 +305,7 @@ def main():
 
     game_on = True
 
-    submit = TextButton(screen, clock, (20, 700), "", 150, 26, 0, 200, 150, 50, 10, game.submit)
+    submit = TextButton(screen, clock, (20, 700), "", 150, 26, 0, 200, 150, 50, -1, game.submit)
     submit.center(WIDTH/2, submit.coords[1])
 
     # endregion
@@ -322,9 +322,6 @@ def main():
         for event in events:
             if event.type == pg.QUIT:
                 exit()
-            elif active:
-                if event.type == pg.MOUSEBUTTONUP and event.button == 3:
-                    game.submit("crane")
         
         # after events
         if active:
